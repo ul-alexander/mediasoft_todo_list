@@ -50,7 +50,7 @@ class CheckListController extends Controller
         $user = User::findOrFail($request->user_id);
         $checkLists = CheckList::where('user_id', '=', $request->user_id)->get();
 
-        if (count($checkLists) >= $user->check_list_count) {
+        if ($checkLists->count() >= $user->check_list_count) {
             return redirect()->route('home')->with('status', 'Превышено допустимое количество чек листов');
         }
         CheckList::create($request->all());
@@ -74,10 +74,12 @@ class CheckListController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit($id)
     {
         $checkList = CheckList::findOrFail($id);
-        $checkList['jobs'] = ListsJob::where('check_list_id', '=', $checkList->id)->get();
+        //dd($checkList);
+        $checkList['jobs'] = $checkList->ListsJobs;
 
         return view('lists.edit', compact('checkList'));
     }

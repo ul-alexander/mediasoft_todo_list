@@ -12,6 +12,8 @@
 */
 
 
+use App\Models\CheckList;
+
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/', function () {
@@ -28,8 +30,8 @@ Route::middleware(['auth'])->group(function () {
     /*Users*/
     Route::get('/users', 'UserController@index')->name('users.index');
     Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
-    Route::put('/users/{user}', 'UserController@update')->name('users.update');
     Route::put('/users/status/{user}', 'UserController@status')->name('users.status');
+    Route::put('/users/{user}', 'UserController@update')->name('users.update');
 
     Route::resource('/roles', 'RoleController');
     Route::resource('/permissions', 'PermissionController')->only([
@@ -38,7 +40,12 @@ Route::middleware(['auth'])->group(function () {
 
     /*Check lists*/
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::resource('/lists', 'CheckListController');
+   //Route::resource('/lists', 'CheckListController');
+   Route::get('/lists', 'CheckListController@index')->name('lists.index');
+   Route::post('/lists', 'CheckListController@store')->name('lists.store');
+   Route::get('/lists/create', 'CheckListController@create')->name('lists.create');
+   Route::get('/lists/{list}/edit', 'CheckListController@edit')->name('lists.edit');
+   Route::delete('/lists/{list}', 'CheckListController@destroy')->name('lists.destroy');
 
 });
 
