@@ -21,7 +21,7 @@ class PermissionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -30,20 +30,23 @@ class PermissionController extends Controller
             'name' => 'required|string|max:255',
             'guard_name' => 'required|string|max:255'
         ]);
-        Permission::create($request->all());
+        Permission::create([
+            'name' => $request->name,
+            'guard_name' => $request->guard_name
+        ]);
 
-        return redirect()->route('roles.index')->with('status','Разрешение создано!');
+        return redirect()->route('roles.index')->with('status', 'Разрешение создано!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         Permission::destroy($id);
-        return redirect()->route('roles.index')->with('status','Разрешение Удалено!');
+        return redirect()->route('roles.index')->with('status', 'Разрешение Удалено!');
     }
 }

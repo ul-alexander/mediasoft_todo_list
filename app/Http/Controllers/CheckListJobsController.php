@@ -20,7 +20,11 @@ class CheckListJobsController extends Controller
             'check_list_id' => 'required|integer',
         ]);
 
-        ListsJob::create($request->all());
+        ListsJob::create([
+            'name' => $request->name,
+            'check_list_id' => $request->check_list_id
+        ]);
+
         return redirect()->route('home')->with('status', 'Задача добавлена');
     }
 

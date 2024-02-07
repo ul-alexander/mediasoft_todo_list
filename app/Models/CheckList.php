@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CheckList extends Model
 {
@@ -11,4 +12,9 @@ class CheckList extends Model
         'name'
     ];
 
+
+    public function ListsJobs(): hasMany
+    {
+        return $this->hasMany(ListsJob::class);
+    }
 }

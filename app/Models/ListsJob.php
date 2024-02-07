@@ -10,4 +10,9 @@ class ListsJob extends Model
         'check_list_id',
         'name'
     ];
+
+    public function CheckList()
+    {
+        return $this->belongsTo(CheckList::class,'check_list_id','id');
+    }
 }
