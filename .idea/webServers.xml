@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="5c8fa89b-fac9-4c4f-856c-a5e5b59100ba" name="mediasoft-ru.1gb.ru" url="http://mediasoft-ru.1gb.ru">
+        <fileTransfer rootFolder="/home/virtwww/w_mediasoft-ru_a4498e84" accessType="SFTP" host="ftp.mediasoft-ru.1gb.ru" port="22" sshConfigId="d24f1461-40b8-4ba4-87b2-10936b55fd9d" sshConfig="w_mediasoft-ru_a4498e84@ftp.mediasoft-ru.1gb.ru:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

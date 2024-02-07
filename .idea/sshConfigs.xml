@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="ftp.mediasoft-ru.1gb.ru" id="d24f1461-40b8-4ba4-87b2-10936b55fd9d" port="22" nameFormat="DESCRIPTIVE" username="w_mediasoft-ru_a4498e84" useOpenSSHConfig="true" />
+    </configs>
+  </component>
+</project>

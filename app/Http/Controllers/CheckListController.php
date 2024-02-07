@@ -16,10 +16,9 @@ class CheckListController extends Controller
         $lists = CheckList::all();
 
         foreach ($lists as $list) {
-            //$list['jobs'] = $list->ListsJobs();
-            //dd($list['jobs']);
 
-            $list['jobs'] = ListsJob::where('check_list_id', '=', $list->id)->get();
+            $list['jobs'] = $list->ListsJobs;
+            //$list['jobs'] = ListsJob::where('check_list_id', '=', $list->id)->get();
         }
         return view('lists.index', ['lists' => $lists]);
     }
