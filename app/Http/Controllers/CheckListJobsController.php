@@ -30,9 +30,10 @@ class CheckListJobsController extends Controller
 
     public function statusJob(Request $request,$id)
     {
-        $job = ListsJob::findOrFail($id);
-        $job->active = $request->status;
-        $job->save();
+        ListsJob::where('id',$id)->update([
+            'active' => $request->status
+        ]);
+
         return redirect()->route('home')->with('status', 'Статус задачи изменен');
     }
     public function destroyJob($id)
