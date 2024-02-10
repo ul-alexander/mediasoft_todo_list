@@ -41,15 +41,13 @@ class RoleController extends Controller
     public function store(Request $request)
 
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'permissions' => 'required',
             'permissions.*' => 'required|integer|exists:permissions,id',
         ]);
 
-        $newRole = Role::create([
-            'name' => $request->name
-        ]);
+        $newRole = Role::create($validated);
 
         $permissions = Permission::whereIn('id', $request->permissions)->get();
 
@@ -93,15 +91,15 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'permissions' => 'required',
             'permissions.*' => 'required|integer|exists:permissions,id',
         ]);
-        $role = Role::where('name', '!=', 'Администратор')->findOrFail($id);
-        $role->update([
-            'name' => $request->name
-        ]);
+
+        $role = Role::where('name', '!=', env('ROLE_HIDE'))->findOrFail($id);
+
+        $role->update($validated);
 
         $permissions = Permission::whereIn('id', $request->permissions)->get();
         $role->syncPermissions($permissions);

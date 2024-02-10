@@ -26,14 +26,11 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'guard_name' => 'required|string|max:255'
         ]);
-        Permission::create([
-            'name' => $request->name,
-            'guard_name' => $request->guard_name
-        ]);
+        Permission::create($validated);
 
         return redirect()->route('roles.index')->with('status', 'Разрешение создано!');
     }

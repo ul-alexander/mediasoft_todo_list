@@ -15,15 +15,19 @@ class CheckListJobsController extends Controller
     }
     public function storeJob(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'check_list_id' => 'required|integer',
         ]);
 
-        ListsJob::create([
+        ListsJob::create($validated);
+
+        /*
+            ListsJob::create([
             'name' => $request->name,
             'check_list_id' => $request->check_list_id
         ]);
+        */
 
         return redirect()->route('home')->with('status', 'Задача добавлена');
     }

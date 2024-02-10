@@ -42,18 +42,20 @@ class CheckListController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'user_id' => 'required|integer',
         ]);
 
-        $user = User::findOrFail($request->user_id);
-        $checkLists = CheckList::where('user_id', '=', $request->user_id)->get();
+        $user = User::findOrFail($validated['user_id']);
+        $checkLists = CheckList::where('user_id', '=', $validated['user_id'])->get();
 
         if ($checkLists->count() >= $user->check_list_count) {
             return redirect()->route('home')->with('status', 'Превышено допустимое количество чек листов');
         }
-        CheckList::create($request->all());
+
+        CheckList::create($validated);
+
         return redirect()->route('home')->with('status', 'Список задач создан');
     }
 

@@ -42,7 +42,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'role' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
@@ -51,25 +51,28 @@ class UserController extends Controller
         ]);
 
         $user = User::findOrFail($id);
+        $user->update($validated);
+
+        /*
         $user->name = $request->name;
         $user->email = $request->email;
         $user->check_list_count = $request->check_list_count;
         $user->active = $request->active;
         $user->save();
+        */
 
-        $user->syncRoles($request->role);
+        $user->syncRoles($validated['role']);
 
         return redirect()->route('users.index')->with('status', 'Пользователь изменен');
     }
 
     public function status(Request $request, $id)
     {
-        $request->validate([
+        $validated = $request->validate([
             'active' => 'required|boolean',
         ]);
         $user = User::findOrFail($id);
-        $user->active = $request->active;
-        $user->save();
+        $user->update($validated);
 
         return redirect()->route('users.index')->with('status', 'Статус пользователя изменен');
     }
