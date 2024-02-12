@@ -20,8 +20,8 @@
                 </div>
             @endif
             <ul class="list-group list-group-flush">
-                @isset($checkList['jobs'])
-                    @foreach($checkList['jobs'] as $job)
+                @isset($checkList->showListJobs)
+                    @foreach($checkList->showListJobs as $job)
                         <li class="list-group-item @if($job->active) text-secondary @else text-success @endif ">
                             @if($job->active)
                                 {{$job->name}}

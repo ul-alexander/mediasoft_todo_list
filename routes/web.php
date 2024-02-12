@@ -44,7 +44,7 @@ Route::middleware(['auth'])->group(function () {
    Route::get('/lists', 'CheckListController@index')->name('lists.index');
    Route::post('/lists', 'CheckListController@store')->name('lists.store');
    Route::get('/lists/create', 'CheckListController@create')->name('lists.create');
-   Route::get('/lists/{list}/edit', 'CheckListController@edit')->name('lists.edit');
+   Route::get('/lists/{checkList}/edit', 'CheckListController@edit')->name('lists.edit');
    Route::delete('/lists/{list}', 'CheckListController@destroy')->name('lists.destroy');
 
 });

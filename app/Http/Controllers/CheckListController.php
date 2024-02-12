@@ -80,11 +80,13 @@ class CheckListController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function edit($id)
+    public function edit(CheckList $checkList)
     {
-        $checkList = CheckList::findOrFail($id);
+        //$checkList = CheckList::findOrFail($id);
+        //$checkList['jobs'] = $checkList->showListJobs;
+
+        $checkList->load('showListJobs');
         //dd($checkList);
-        $checkList['jobs'] = $checkList->showListJobs;
 
         return view('lists.edit', compact('checkList'));
     }
