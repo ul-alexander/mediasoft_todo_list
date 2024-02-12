@@ -20,8 +20,8 @@
                             <h5 class="card-title">{{$list->name}}</h5>
                         </div>
                         <ul class="list-group list-group-flush">
-                            @isset($list['jobs'])
-                                @foreach($list['jobs'] as $job)
+                            @isset($list->showListJobs)
+                                @foreach($list->showListJobs as $job)
                                     <li class="list-group-item @if($job->active) text-secondary @else text-success @endif ">
                                         @if($job->active)
                                             {{$job->name}}

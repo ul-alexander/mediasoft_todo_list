@@ -14,12 +14,15 @@ class CheckListController extends Controller
     public function index()
     {
         $lists = CheckList::all();
+        $lists->load('showListJobs');
 
-        foreach ($lists as $list) {
+        //dd($lists[0]->showListJobs[0]->name);
 
-            $list['jobs'] = $list->ListsJobs;
+        //foreach ($lists as $list) {
+
+            //$list['jobs'] = $list->showListJobs;
             //$list['jobs'] = ListsJob::where('check_list_id', '=', $list->id)->get();
-        }
+        //}
         return view('lists.index', ['lists' => $lists]);
     }
 
@@ -81,7 +84,7 @@ class CheckListController extends Controller
     {
         $checkList = CheckList::findOrFail($id);
         //dd($checkList);
-        $checkList['jobs'] = $checkList->ListsJobs;
+        $checkList['jobs'] = $checkList->showListJobs;
 
         return view('lists.edit', compact('checkList'));
     }

@@ -13,7 +13,7 @@ class CheckList extends Model
     ];
 
 
-    public function ListsJobs(): hasMany
+    public function showListJobs(): hasMany
     {
         return $this->hasMany(ListsJob::class);
     }
