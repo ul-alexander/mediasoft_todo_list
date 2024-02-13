@@ -11,8 +11,16 @@ class ListsJob extends Model
         'name'
     ];
 
-    public function CheckList()
+    //relations more to one
+    public function checkList()
     {
-        return $this->belongsTo(CheckList::class,'check_list_id','id');
+        return $this->belongsTo(CheckList::class, 'check_list_id', 'id');
+    }
+
+    //mutators
+
+    public function getNameAttribute($value)
+    {
+        return strtolower($value);
     }
 }
